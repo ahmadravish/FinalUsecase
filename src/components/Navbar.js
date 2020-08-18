@@ -41,7 +41,7 @@ class Navbar extends React.Component {
                 <li style={{ marginLeft: '10px' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     {this.state.sidebarOpen ? (
-                      <>
+                      <div>
                         <img
                           src={Icon1}
                           style={{
@@ -61,9 +61,12 @@ class Navbar extends React.Component {
                             marginTop: '10px',
                           }}
                         >
-                          <h5> Cognitive Engineering Data Extractor</h5>
+                          <h5 className='text-white'>
+                            {' '}
+                            Cognitive Engineering Data Extractor
+                          </h5>
                         </div>
-                      </>
+                      </div>
                     ) : (
                       <img
                         src={Icon1}
@@ -115,7 +118,7 @@ class Navbar extends React.Component {
                             marginTop: '10px',
                           }}
                         >
-                          <h5> Home</h5>
+                          <h5 className='text-white'> Home</h5>
                         </div>
                       </>
                     ) : (
@@ -158,7 +161,7 @@ class Navbar extends React.Component {
                             marginTop: '10px',
                           }}
                         >
-                          <h5> Upload </h5>
+                          <h5 className='text-white'> Upload </h5>
                         </div>
                       </>
                     ) : (
@@ -201,7 +204,7 @@ class Navbar extends React.Component {
                             marginTop: '10px',
                           }}
                         >
-                          <h5> Search </h5>
+                          <h5 className='text-white'> Search </h5>
                         </div>
                       </>
                     ) : (
@@ -244,7 +247,7 @@ class Navbar extends React.Component {
                             marginTop: '10px',
                           }}
                         >
-                          <h5> Add User </h5>
+                          <h5 className='text-white'> Add User </h5>
                         </div>
                       </>
                     ) : (
@@ -287,7 +290,7 @@ class Navbar extends React.Component {
                             marginTop: '10px',
                           }}
                         >
-                          <h5> Logout </h5>
+                          <h5 className='text-white'> Logout </h5>
                         </div>
                       </>
                     ) : (

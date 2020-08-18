@@ -14,14 +14,14 @@ const Hero = () => {
             <div className='box-fa2'>
               <img src={Group44} alt='#' />
 
-              <h5 style={{ marginTop: '10%' }}>Upload Drawing</h5>
+              <small style={{ marginTop: '30%' }}>ADD IMAGE</small>
             </div>
           </Link>
           <Link to='/search'>
             <div className='box-fa3'>
               <img src={Search44} alt='#' />
 
-              <h5 style={{ marginTop: '10%' }}>Search Drawing</h5>
+              <small style={{ marginTop: '20%' }}>SEARCH IMAGE</small>
             </div>
           </Link>
         </div>

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
-import Group37 from '../Group37.svg';
+import Group37 from '../Group37.png';
 
 const Login = () => {
   let history = useHistory();
@@ -52,13 +52,13 @@ const Login = () => {
         <div className='row'>
           <div className='column'>
             <div className='box-login'>
-              <h3>Login to Your Account</h3>
+              <h3>Login to your account</h3>
               <form className='form' onSubmit={(e) => onSubmit(e)}>
                 <div className='form-group'>
                   <input
                     type='username'
                     className='input-login'
-                    placeholder='Username'
+                    placeholder='User Name'
                     name='username'
                     value={username}
                     onChange={(e) => onChange_fun(e)}
@@ -80,7 +80,7 @@ const Login = () => {
                 <input
                   type='submit'
                   className='btn btn-warning btn-lg'
-                  value='Login'
+                  value='LOGIN'
                 />
               </form>
 

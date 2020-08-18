@@ -5,6 +5,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import pdf from '../pdf.png';
+import Group44 from '../img/Group44.png';
+import upload from '../img/upload.png';
 
 const Read = () => {
   const [fileObj] = useState([]);
@@ -39,6 +41,7 @@ const Read = () => {
   const handleTemplate = (e) => {
     // console.log(e.target.value);
     setTemplate(e.target.value);
+    localStorage.setItem('Template', JSON.stringify(e.target.value));
   };
 
   const dragOver = (e) => {
@@ -119,255 +122,269 @@ const Read = () => {
 
   return (
     <Fragment>
-      <Navbar />
-      <div className='row'>
-        <div className='box-read'>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: '-40px',
-            }}
-          >
-            <i
-              class='fa fa-files-o'
-              aria-hidden='true'
-              style={{ fontSize: '50px', padding: '10px' }}
-            ></i>
-            <h3> Add Image</h3>
-          </div>
+      <div className='background-login'>
+        <Navbar />
 
-          {Template === 'Liquid Telecom' ? (
-            <form className='section'>
-              <div className='cocktails-center'>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    border: '2px dashed black',
-                    padding: '50px',
-                  }}
-                >
-                  <i
-                    class='fa fa-upload'
-                    aria-hidden='true'
-                    style={{ fontSize: '50px' }}
-                  ></i>
-                  <span>Upload Pdf</span>
-                </div>
-              </div>
-            </form>
-          ) : (
-            <form className='section'>
-              <div className='cocktails-center'>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    border: '2px dashed black',
-                    padding: '50px',
-                  }}
-                  onDragOver={dragOver}
-                  onDragEnter={dragEnter}
-                  onDragLeave={dragLeave}
-                  onDrop={fileDrop}
-                >
-                  <i
-                    class='fa fa-upload'
-                    aria-hidden='true'
-                    style={{ fontSize: '15px' }}
-                  ></i>
-                  <span>Upload Your Image</span>
-                </div>
-              </div>
-            </form>
-          )}
-
-          <div class='input-group sm-3'>
-            <div class='col-xs-4'>
-              <select
-                value={Template}
-                onChange={handleTemplate}
-                class='custom-select'
-                id='inputGroupSelect02'
-              >
-                <option selected>select Template</option>
-                <option value='Table at Top '>Table at Top</option>
-                <option value='Table at Bottom'>Table at Bottom</option>
-                <option value='Liquid Telecom'>Telecom Drawing</option>
-                <option value='Others'>Others </option>
-              </select>
+        <div className='row'>
+          <div className='box-read'>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '-40px',
+              }}
+            >
+              <img src={Group44} alt='#' style={{ width: '17%' }}></img>
+              <h3> Add Image</h3>
             </div>
-          </div>
 
-          <br />
-
-          <form onSubmit={uploadFiles}>
             {Template === 'Liquid Telecom' ? (
-              <div class='input-group '>
-                <div className='col-xs-4'>
-                  {uploadStatus ? (
-                    ''
-                  ) : uploading ? (
-                    ' '
-                  ) : (
-                    <div class='custom-file '>
-                      <input
-                        type='file'
-                        name='file'
-                        className='custom-file-input'
-                        id='inputGroupFile02'
-                        onChange={uploadMultipleFiles}
-                        accept='.pdf'
-                        multiple
-                      />
-                      <label class='custom-file-label' for='inputGroupFile02'>
-                        Choose file
-                      </label>
-                    </div>
-                  )}
+              <form className='section'>
+                <div className='cocktails-center'>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      border: '2px dashed black',
+                      padding: '50px',
+                    }}
+                  >
+                    <i
+                      class='fa fa-upload'
+                      aria-hidden='true'
+                      style={{ fontSize: '50px' }}
+                    ></i>
+                    <span>Upload Pdf</span>
+                  </div>
                 </div>
-              </div>
+              </form>
             ) : (
-              <div class='input-group '>
-                <div className='col-xs-4'>
-                  {uploadStatus ? (
-                    ''
-                  ) : uploading ? (
-                    ' '
-                  ) : (
-                    <div class='custom-file '>
-                      <input
-                        type='file'
-                        name='file'
-                        className='custom-file-input'
-                        id='inputGroupFile02'
-                        onChange={uploadMultipleFiles}
-                        accept='image/*'
-                        multiple
-                      />
-                      <label class='custom-file-label' for='inputGroupFile02'>
-                        Choose file
-                      </label>
-                    </div>
-                  )}
+              <form className='section'>
+                <div className='cocktails-center'>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      border: '2px dashed #707070',
+                      padding: '10%',
+                      borderRadius: '5%',
+                    }}
+                    onDragOver={dragOver}
+                    onDragEnter={dragEnter}
+                    onDragLeave={dragLeave}
+                    onDrop={fileDrop}
+                  >
+                    <ul style={{ marginLeft: '26%', alignItems: 'center' }}>
+                      <li>
+                        <img
+                          src={upload}
+                          style={{ width: '37%', marginLeft: '7%' }}
+                          alt='#'
+                        />
+                      </li>
+                      <br />
+                      <li>
+                        <h5
+                          style={{
+                            textAlign: 'center',
+                            font: 'Regular 14px/19px Roboto',
+                            letterSpacing: '0px',
+                            marginLeft: '-55%',
+                          }}
+                        >
+                          Upload your file
+                        </h5>
+                        <p style={{ marginLeft: '1%', marginTop: '-12%' }}>
+                          .jpeg,.png,.tiff
+                        </p>
+                      </li>
+                      <br />
+
+                      <li>
+                        <p
+                          style={{
+                            textAlign: 'center',
+                            font: 'Regular 14px/19px Roboto',
+                            letterSpacing: '0px',
+                            marginLeft: '-50%',
+                          }}
+                        >
+                          You can Drag and drop here
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </form>
             )}
 
-            <br />
-            <br />
-            {uploading ? (
-              <div
-                className='progress-bar-container'
-                style={{ width: '25%', height: '10%' }}
-              >
-                <CircularProgressbar
-                  value={uploadProgress}
-                  text={`${uploadProgress}% uploaded`}
-                  styles={buildStyles({
-                    textSize: '10px',
-                    pathColor: 'teal',
-                  })}
-                />
-              </div>
-            ) : null}
-            <br />
-            {uploadStatus ? (
-              ''
-            ) : (
-              <button
-                type='submit'
-                // disabled={status}
-                className='btn btn-warning'
-                // onClick={handledisable}
-              >
-                Upload
-              </button>
-            )}
-          </form>
-
-          <br />
-
-          {uploadStatus ? (
-            Template == 'Liquid Telecom' ? (
-              <div>
-                <Link
-                  to={{
-                    pathname: '/pdftable',
-                    countViews: 0,
-                    countRecords: 0,
-                    countManual: 0,
-                    fileObj: { fileObj },
-                    path: { path },
-                    urlArray: { urlArray },
-                    Template: { Template },
-                    time: { time },
-                  }}
-                  className='btn btn-warning btn-lg'
+            <div class='input-group sm-3'>
+              <div class='col-xs-4'>
+                <select
+                  value={Template}
+                  onChange={handleTemplate}
+                  class='custom-select'
+                  id='inputGroupSelect02'
                 >
-                  Proceed
-                </Link>
+                  <option selected>select Template</option>
+                  <option value='Table at Top '>Table at Top</option>
+                  <option value='Table at Bottom'>Table at Bottom</option>
+                  <option value='Liquid Telecom'>Telecom Drawing</option>
+                  <option value='Others'>Others </option>
+                </select>
               </div>
-            ) : (
-              <div>
-                <Link
-                  to={{
-                    pathname: '/setview',
-                    Template: { Template },
-                    fileObj: { fileObj },
-                    path: { path },
-                    urlArray: { urlArray },
-                    time: { time },
-                  }}
+            </div>
+
+            <br />
+
+            <form onSubmit={uploadFiles}>
+              {Template === 'Liquid Telecom' ? (
+                <div class='input-group '>
+                  <div className='col-xs-4'>
+                    {uploadStatus ? (
+                      ''
+                    ) : uploading ? (
+                      ' '
+                    ) : (
+                      <div class='custom-file '>
+                        <input
+                          type='file'
+                          name='file'
+                          className='custom-file-input'
+                          id='inputGroupFile02'
+                          onChange={uploadMultipleFiles}
+                          accept='.pdf'
+                          multiple
+                        />
+                        <label class='custom-file-label' for='inputGroupFile02'>
+                          Choose file
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div class='input-group '>
+                  <div className='col-xs-4'>
+                    {uploadStatus ? (
+                      ''
+                    ) : uploading ? (
+                      ' '
+                    ) : (
+                      <div class='custom-file '>
+                        <input
+                          type='file'
+                          name='file'
+                          className='custom-file-input'
+                          id='inputGroupFile02'
+                          onChange={uploadMultipleFiles}
+                          accept='image/*'
+                          multiple
+                        />
+                        <label class='custom-file-label' for='inputGroupFile02'>
+                          Choose file
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <br />
+              <br />
+              {uploading ? (
+                <div
+                  className='progress-bar-container'
+                  style={{ width: '25%', height: '10%' }}
+                >
+                  <CircularProgressbar
+                    value={uploadProgress}
+                    text={`${uploadProgress}% uploaded`}
+                    styles={buildStyles({
+                      textSize: '10px',
+                      pathColor: 'teal',
+                    })}
+                  />
+                </div>
+              ) : null}
+              <br />
+              {uploadStatus ? (
+                ''
+              ) : (
+                <button
+                  type='submit'
+                  // disabled={status}
                   className='btn btn-warning'
+                  // onClick={handledisable}
                 >
-                  Proceed
-                </Link>
+                  Upload
+                </button>
+              )}
+            </form>
+
+            <br />
+
+            {uploadStatus ? (
+              Template == 'Liquid Telecom' ? (
+                <div>
+                  <Link to='/pdftable' className='btn btn-warning btn-lg'>
+                    Proceed
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <Link to='/setview' className='btn btn-warning'>
+                    Proceed
+                  </Link>
+                </div>
+              )
+            ) : (
+              ''
+            )}
+
+            <br />
+            {error ? (
+              <h5 className='text-danger'>Please Select Template</h5>
+            ) : (
+              ''
+            )}
+          </div>
+          {uploadStatus ? (
+            <div className='col-sm-4'>
+              <div className='box-read-gallery'>
+                {Template === 'Liquid Telecom' ? (
+                  <form className='section'>
+                    <div className='cocktails-center'>
+                      {uploadStatus ? (
+                        <article className='cocktail'>
+                          <img src={pdf} alt='#' />
+                        </article>
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                  </form>
+                ) : (
+                  <form className='section'>
+                    <div className='cocktails-center'>
+                      {uploadStatus
+                        ? (urlArray || []).map((url) => (
+                            <article className='cocktail'>
+                              <div className='img-container'>
+                                <img src={url} alt='#' />
+                              </div>
+                            </article>
+                          ))
+                        : ''}
+                    </div>
+                  </form>
+                )}
               </div>
-            )
+            </div>
           ) : (
             ''
           )}
-
-          <br />
-          {error ? <h5 className='text-danger'>Please Select Template</h5> : ''}
         </div>
-        {uploadStatus ? (
-          <div className='col-sm-4'>
-            <div className='box-read-gallery'>
-              {Template === 'Liquid Telecom' ? (
-                <form className='section'>
-                  <div className='cocktails-center'>
-                    {uploadStatus ? (
-                      <article className='cocktail'>
-                        <img src={pdf} alt='#' />
-                      </article>
-                    ) : (
-                      ''
-                    )}
-                  </div>
-                </form>
-              ) : (
-                <form className='section'>
-                  <div className='cocktails-center'>
-                    {uploadStatus
-                      ? (urlArray || []).map((url) => (
-                          <article className='cocktail'>
-                            <div className='img-container'>
-                              <img src={url} alt='#' />
-                            </div>
-                          </article>
-                        ))
-                      : ''}
-                  </div>
-                </form>
-              )}
-            </div>
-          </div>
-        ) : (
-          ''
-        )}
       </div>
     </Fragment>
   );
