@@ -25,8 +25,10 @@ const Read = () => {
     fileObj.push(e.target.files);
     console.log(fileObj);
     for (let i = 0; i < fileObj[0].length; i++) {
-      urlArray.push(URL.createObjectURL(fileObj[0][i]));
+      if (urlArray.indexOf(URL.createObjectURL(fileObj[0][i])) == -1)
+        urlArray.push(URL.createObjectURL(fileObj[0][i]));
     }
+    uploadFiles();
   };
 
   const uploadPdfFiles = (e) => {
@@ -63,12 +65,14 @@ const Read = () => {
     fileObj.push(e.dataTransfer.files);
     console.log(fileObj);
     for (let i = 0; i < fileObj[0].length; i++) {
-      urlArray.push(URL.createObjectURL(fileObj[0][i]));
+      if (urlArray.indexOf(URL.createObjectURL(fileObj[0][i])) == -1)
+        urlArray.push(URL.createObjectURL(fileObj[0][i]));
     }
+    uploadFiles();
   };
 
   const uploadFiles = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setTime(new Date().toLocaleString());
     localStorage.setItem('Time', JSON.stringify(new Date().toLocaleString()));
     if (Template === null || !fileObj) {
@@ -79,7 +83,7 @@ const Read = () => {
       var myArray = [];
 
       for (var i = 0; i < fileObj[0].length; i++) {
-        myArray.push(fileObj[0][i]);
+        if (myArray.indexOf(fileObj[0][i]) == -1) myArray.push(fileObj[0][i]);
       }
       console.log(Template);
       //const body = myArray;
@@ -137,6 +141,26 @@ const Read = () => {
               <img src={Group44} alt='#' style={{ width: '17%' }}></img>
               <h3> Add Image</h3>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class='input-group sm-3'>
+              <div class='col-xs-4'>
+                <select
+                  value={Template}
+                  onChange={handleTemplate}
+                  class='custom-select'
+                  id='inputGroupSelect02'
+                >
+                  <option selected>select Template</option>
+                  <option value='Table at Top '>Table at Top</option>
+                  <option value='Table at Bottom'>Table at Bottom</option>
+                  <option value='Liquid Telecom'>Telecom Drawing</option>
+                  <option value='Others'>Others </option>
+                </select>
+              </div>
+            </div>
 
             {Template === 'Liquid Telecom' ? (
               <form className='section'>
@@ -145,16 +169,54 @@ const Read = () => {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      border: '2px dashed black',
-                      padding: '50px',
+                      border: '2px dashed #707070',
+                      padding: '10%',
+                      borderRadius: '5%',
                     }}
+                    onDragOver={dragOver}
+                    onDragEnter={dragEnter}
+                    onDragLeave={dragLeave}
+                    onDrop={fileDrop}
                   >
-                    <i
-                      class='fa fa-upload'
-                      aria-hidden='true'
-                      style={{ fontSize: '50px' }}
-                    ></i>
-                    <span>Upload Pdf</span>
+                    <ul style={{ marginLeft: '26%', alignItems: 'center' }}>
+                      <li>
+                        <img
+                          src={upload}
+                          style={{ width: '37%', marginLeft: '7%' }}
+                          alt='#'
+                        />
+                      </li>
+                      <br />
+                      <li>
+                        <h5
+                          style={{
+                            textAlign: 'center',
+                            font: 'Regular 14px/19px Roboto',
+                            letterSpacing: '0px',
+                            marginLeft: '-55%',
+                          }}
+                        >
+                          Upload your file
+                        </h5>
+                        <p style={{ marginLeft: '1%', marginTop: '-12%' }}>
+                          .pdf
+                        </p>
+                      </li>
+                      <br />
+
+                      <li>
+                        <p
+                          style={{
+                            textAlign: 'center',
+                            font: 'Regular 14px/19px Roboto',
+                            letterSpacing: '0px',
+                            marginLeft: '-50%',
+                          }}
+                        >
+                          You can Drag and drop here
+                        </p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </form>
@@ -218,26 +280,7 @@ const Read = () => {
               </form>
             )}
 
-            <div class='input-group sm-3'>
-              <div class='col-xs-4'>
-                <select
-                  value={Template}
-                  onChange={handleTemplate}
-                  class='custom-select'
-                  id='inputGroupSelect02'
-                >
-                  <option selected>select Template</option>
-                  <option value='Table at Top '>Table at Top</option>
-                  <option value='Table at Bottom'>Table at Bottom</option>
-                  <option value='Liquid Telecom'>Telecom Drawing</option>
-                  <option value='Others'>Others </option>
-                </select>
-              </div>
-            </div>
-
-            <br />
-
-            <form onSubmit={uploadFiles}>
+            <form>
               {Template === 'Liquid Telecom' ? (
                 <div class='input-group '>
                   <div className='col-xs-4'>
@@ -308,41 +351,8 @@ const Read = () => {
                 </div>
               ) : null}
               <br />
-              {uploadStatus ? (
-                ''
-              ) : (
-                <button
-                  type='submit'
-                  // disabled={status}
-                  className='btn btn-warning'
-                  // onClick={handledisable}
-                >
-                  Upload
-                </button>
-              )}
             </form>
 
-            <br />
-
-            {uploadStatus ? (
-              Template == 'Liquid Telecom' ? (
-                <div>
-                  <Link to='/pdftable' className='btn btn-warning btn-lg'>
-                    Proceed
-                  </Link>
-                </div>
-              ) : (
-                <div>
-                  <Link to='/setview' className='btn btn-warning'>
-                    Proceed
-                  </Link>
-                </div>
-              )
-            ) : (
-              ''
-            )}
-
-            <br />
             {error ? (
               <h5 className='text-danger'>Please Select Template</h5>
             ) : (
@@ -353,30 +363,63 @@ const Read = () => {
             <div className='col-sm-4'>
               <div className='box-read-gallery'>
                 {Template === 'Liquid Telecom' ? (
-                  <form className='section'>
-                    <div className='cocktails-center'>
-                      {uploadStatus ? (
-                        <article className='cocktail'>
-                          <img src={pdf} alt='#' />
-                        </article>
-                      ) : (
-                        ''
-                      )}
+                  <>
+                    <h5 style={{ color: 'orange' }}>Pdf Uploaded Success</h5>
+                    <div>
+                      <Link
+                        to='/pdftable'
+                        className='btn btn-warning'
+                        style={{
+                          fontSize: 'x-small',
+                          padding: '2.4%',
+                          width: '20%',
+                        }}
+                      >
+                        CONTINUE
+                      </Link>
                     </div>
-                  </form>
+                  </>
                 ) : (
                   <form className='section'>
-                    <div className='cocktails-center'>
+                    <div className='grid'>
                       {uploadStatus
                         ? (urlArray || []).map((url) => (
                             <article className='cocktail'>
                               <div className='img-container'>
-                                <img src={url} alt='#' />
+                                <img
+                                  src={url}
+                                  style={{
+                                    border: '1px solid #BEBEBE',
+                                    borderRadius: '2.5%',
+                                  }}
+                                  alt='#'
+                                />
                               </div>
                             </article>
                           ))
                         : ''}
                     </div>
+                    {uploadStatus ? (
+                      Template == 'Liquid Telecom' ? (
+                        ''
+                      ) : (
+                        <div>
+                          <Link
+                            to='/setview'
+                            className='btn btn-warning'
+                            style={{
+                              fontSize: 'x-small',
+                              padding: '2.4%',
+                              width: '20%',
+                            }}
+                          >
+                            CONTINUE
+                          </Link>
+                        </div>
+                      )
+                    ) : (
+                      ''
+                    )}
                   </form>
                 )}
               </div>

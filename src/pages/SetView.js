@@ -249,20 +249,22 @@ function SetView() {
                           to='/tabledetails'
                           className='btn btn-warning '
                           style={{
-                            padding: '5%',
-                            fontSize: '1rem',
+                            padding: '3.7%',
+                            letterSpacing: '0px',
                             lineHeight: '0',
                             position: 'absolute',
                             background: '#ff8000',
                             color: '#ffffff',
-                            width: '50%',
-                            marginLeft: '110%',
-                            fontSize: '80%',
+                            width: '30%',
+
+                            marginLeft: '160%',
+                            fontSize: '60%',
+                            textAlign: 'center',
                             marginTop: '20%',
-                            borderRadius: '5%',
+                            borderRadius: '6%',
                           }}
                         >
-                          CONFIRM AND PROCEED
+                          CONFIRM &amp; PROCEED
                         </Link>
                       </div>
                     ) : (
@@ -274,101 +276,129 @@ function SetView() {
                       </p>
                     )}
                   </div>
-                  <div className='setview-center'>
-                    {/*style={{ 'margin-left': '2%', width: '80%', height: '5%' }} */}
-                    <h1>Set View</h1>
-                    {/* <h2>{currentPath ? currentPath[0] : ''}</h2>*/}
-                    {success ? (
-                      View === 'remove' ? (
-                        <h5 class='text-success'>View Removed</h5>
+                  {currentPath ? (
+                    <div className='setview-center'>
+                      {/*style={{ 'margin-left': '2%', width: '80%', height: '5%' }} */}
+                      <h1>Set View</h1>
+                      {/* <h2>{currentPath ? currentPath[0] : ''}</h2>*/}
+                      {success ? (
+                        View === 'remove' ? (
+                          <h5 class='text-success'>View Removed</h5>
+                        ) : (
+                          <h5 class='text-success'>{View} view set</h5>
+                        )
                       ) : (
-                        <h5 class='text-success'>{View} view set</h5>
-                      )
-                    ) : (
-                      ' '
-                    )}
-                    <div>
-                      {currentPath
-                        ? re.map((i) => {
-                            return (
-                              <div className='form-group preview'>
-                                <div className='setview-single'>
-                                  {currentPath ? (
-                                    <img
-                                      //src={'http://localhost:5000/' + i[0]}
-                                      src={i[0]}
-                                      alt='#'
-                                    />
-                                  ) : (
-                                    ' '
-                                  )}
-                                  <br />
+                        ' '
+                      )}
+                      <div className='grid-setview'>
+                        {currentPath
+                          ? re.map((i) => {
+                              return (
+                                <div className='form-group preview'>
+                                  <div
+                                    className='setview-single'
+                                    style={{
+                                      display: 'flex',
+                                      justifyContent: 'space-around',
+                                    }}
+                                  >
+                                    {currentPath ? (
+                                      <img
+                                        //src={'http://localhost:5000/' + i[0]}
+                                        src={i[0]}
+                                        style={{ width: '37%', height: 'auto' }}
+                                        alt='#'
+                                      />
+                                    ) : (
+                                      ' '
+                                    )}
+                                    <br />
 
-                                  {path ? (
-                                    <form onSubmit={uploadView}>
-                                      <div class='input-group sm-3'>
-                                        <div class='col-xs-4'>
-                                          <p style={{ color: 'orange' }}>
-                                            Predicted view: {i[1]}
-                                          </p>
-                                          <select
-                                            value={i[1].View}
-                                            onChange={(e) => {
-                                              handleView(e);
-                                              currentImagefun(i[0]);
-                                            }}
-                                            class='custom-select'
-                                            id='inputGroupSelect02'
-                                          >
-                                            <option selected>
-                                              select View
-                                            </option>
-                                            <option value='front'>Front</option>
-                                            <option value='top'>Top</option>
-                                            <option value='bottom'>
-                                              Bottom
-                                            </option>
-                                            <option value='left'>Left</option>
-                                            <option value='right'>Right</option>
-                                            <option value='isometric'>
-                                              Isometric
-                                            </option>
-                                            <option value='assembly'>
-                                              Assembly
-                                            </option>
-                                            <option value='remove'>
-                                              Remove
-                                            </option>
-                                          </select>
+                                    {path ? (
+                                      <form onSubmit={uploadView}>
+                                        <div class='input-group sm-3'>
+                                          <div class='col-xs-4'>
+                                            <p style={{ color: 'orange' }}>
+                                              Predicted view: {i[1]}
+                                            </p>
+                                            <select
+                                              value={i[1].View}
+                                              onChange={(e) => {
+                                                handleView(e);
+                                                currentImagefun(i[0]);
+                                              }}
+                                              class='custom-select'
+                                              id='inputGroupSelect02'
+                                              style={{
+                                                width: '70%',
+                                                marginLeft: '6%',
+                                                position: 'unset',
+                                                padding: '0%',
+                                              }}
+                                            >
+                                              <option selected>
+                                                select View
+                                              </option>
+                                              <option value='front'>
+                                                Front
+                                              </option>
+                                              <option value='top'>Top</option>
+                                              <option value='bottom'>
+                                                Bottom
+                                              </option>
+                                              <option value='left'>Left</option>
+                                              <option value='right'>
+                                                Right
+                                              </option>
+                                              <option value='isometric'>
+                                                Isometric
+                                              </option>
+                                              <option value='assembly'>
+                                                Assembly
+                                              </option>
+                                              <option value='remove'>
+                                                Remove
+                                              </option>
+                                            </select>
+                                          </div>
                                         </div>
-                                      </div>
-                                      <br />
-                                      <button
-                                        className='btn btn-warning'
-                                        style={{ position: 'relative' }}
-                                      >
-                                        Set View
-                                      </button>
-                                    </form>
-                                  ) : (
-                                    ' '
-                                  )}
+                                        <br />
+                                        <button
+                                          className='btn btn-warning'
+                                          style={{
+                                            position: 'relative',
+                                            fontSize: 'smaller',
+                                            marginLeft: '6%',
+                                          }}
+                                        >
+                                          Set View
+                                        </button>
+                                      </form>
+                                    ) : (
+                                      ' '
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          })
-                        : ' '}
-                    </div>
+                              );
+                            })
+                          : ' '}
+                      </div>
 
-                    <br />
-                    <br />
-                    <br />
-                    <center>
-                      <button className='btn btn-warning' onClick={scrollToTop}>
-                        Scroll Up
-                      </button>
-                    </center>
-                  </div>
+                      <br />
+                      <br />
+                      <br />
+                      <center>
+                        <button
+                          className='btn btn-warning'
+                          onClick={scrollToTop}
+                        >
+                          Scroll Up
+                        </button>
+                      </center>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </div>
             </div>
