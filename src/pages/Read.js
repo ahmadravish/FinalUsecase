@@ -213,7 +213,7 @@ const Read = () => {
                             marginLeft: '-50%',
                           }}
                         >
-                          You can Drag and drop here
+                          You can drag and drop here
                         </p>
                       </li>
                     </ul>
@@ -256,8 +256,15 @@ const Read = () => {
                         >
                           Upload your file
                         </h5>
-                        <p style={{ marginLeft: '1%', marginTop: '-12%' }}>
-                          .jpeg,.png,.tiff
+                        <p
+                          style={{
+                            marginLeft: '1%',
+                            marginTop: '-12%',
+                            font: ' normal normal normal 16px/21px Roboto',
+                            letterSpacing: '0px',
+                          }}
+                        >
+                          .jpg,.jpeg,.png
                         </p>
                       </li>
                       <br />
@@ -266,22 +273,42 @@ const Read = () => {
                         <p
                           style={{
                             textAlign: 'center',
-                            font: 'Regular 14px/19px Roboto',
+                            font: 'Regular 13px/19px Roboto',
                             letterSpacing: '0px',
                             marginLeft: '-50%',
                           }}
                         >
-                          You can Drag and drop here
+                          You can drag and drop here
                         </p>
                       </li>
                     </ul>
                   </div>
                 </div>
+                {uploading ? (
+                  <div
+                    className='progress-bar-container'
+                    style={{
+                      width: '25%',
+                      height: '10%',
+                      marginLeft: '30%',
+                      marginTop: '5%',
+                    }}
+                  >
+                    <CircularProgressbar
+                      value={uploadProgress}
+                      text={`${uploadProgress}% uploaded`}
+                      styles={buildStyles({
+                        textSize: '10px',
+                        pathColor: 'teal',
+                      })}
+                    />
+                  </div>
+                ) : null}
               </form>
             )}
 
             <form>
-              {Template === 'Liquid Telecom' ? (
+              {/*Template === 'Liquid Telecom' ? (
                 <div class='input-group '>
                   <div className='col-xs-4'>
                     {uploadStatus ? (
@@ -331,25 +358,8 @@ const Read = () => {
                     )}
                   </div>
                 </div>
-              )}
+                    )*/}
 
-              <br />
-              <br />
-              {uploading ? (
-                <div
-                  className='progress-bar-container'
-                  style={{ width: '25%', height: '10%' }}
-                >
-                  <CircularProgressbar
-                    value={uploadProgress}
-                    text={`${uploadProgress}% uploaded`}
-                    styles={buildStyles({
-                      textSize: '10px',
-                      pathColor: 'teal',
-                    })}
-                  />
-                </div>
-              ) : null}
               <br />
             </form>
 
@@ -361,7 +371,7 @@ const Read = () => {
           </div>
           {uploadStatus ? (
             <div className='col-sm-4'>
-              <div className='box-read-gallery'>
+              <div className='box-read-gallery' style={{ width: '110%' }}>
                 {Template === 'Liquid Telecom' ? (
                   <>
                     <h5 style={{ color: 'orange' }}>Pdf Uploaded Success</h5>
@@ -373,6 +383,7 @@ const Read = () => {
                           fontSize: 'x-small',
                           padding: '2.4%',
                           width: '20%',
+                          marginLeft: '6%',
                         }}
                       >
                         CONTINUE
@@ -391,6 +402,7 @@ const Read = () => {
                                   style={{
                                     border: '1px solid #BEBEBE',
                                     borderRadius: '2.5%',
+                                    marginLeft: '8.5%',
                                   }}
                                   alt='#'
                                 />
@@ -411,6 +423,7 @@ const Read = () => {
                               fontSize: 'x-small',
                               padding: '2.4%',
                               width: '20%',
+                              marginLeft: '6%',
                             }}
                           >
                             CONTINUE

@@ -9,7 +9,6 @@ import ImageDetails from './pages/ImageDetails';
 import TableDetails from './pages/TableDetails';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import FinalResult from './pages/FinalResult';
 import PdfTable from './pages/PdfTable';
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
         <Route exact path='/imagedetails' component={ImageDetails} />
         <Route exact path='/tabledetails' component={TableDetails} />
         <Route exact path='/pdftable' component={PdfTable} />
-        <Route exact path='/finalresult' component={FinalResult} />
       </Switch>
     </Router>
   );

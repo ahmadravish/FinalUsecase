@@ -198,411 +198,409 @@ function TableDetails(props) {
       .catch((err) => console.error(err));
   };
 
-  try {
-    if (inputTable) {
-      var details = inputTable.details;
-      var red = details.red;
-      var green = details.green;
-      /*console.log(details);
+  //try {
+  if (inputTable) {
+    var details = inputTable.details;
+    var red = details.red;
+    var green = details.green;
+    /*console.log(details);
       console.log(red);
       console.log(green);*/
-    }
+  }
 
-    return (
-      <Fragment>
-        <Navbar />
-        <div className='background-login'>
-          <div style={{ 'margin-left': '7%' }}>
-            <p className='cnt-img' style={{ color: 'orange' }}>
-              **Please select a file to start processing
-            </p>
-            <div class='row'>
-              <div class='col-sm-3'>
-                <div className='box-tableview-image'>
-                  {path.map((img, key) => {
-                    return (
-                      <div>
-                        <div className='form-group preview'>
-                          <div className='container'>
-                            <img
-                              // src={'http://localhost:5000/' + img[0] || ' '}
-                              src={img[0]}
-                              alt='input Image'
-                              className='image'
-                              style={{
-                                top: '10%',
-                                left: '10%',
-                                width: '100%',
-                                height: '100%',
-                                background: 'transparent',
-                                borderRadius: '4%',
-                                position: 'unset',
-                              }}
-                              onClick={() => {
-                                setMainTable(img[0]);
-                              }}
-                            />
+  return (
+    <Fragment>
+      <Navbar />
+      <div className='background-login' style={{ position: 'unset' }}>
+        <div style={{ 'margin-left': '7%' }}>
+          <p className='cnt-img' style={{ color: 'orange' }}>
+            **Please select a file to start processing
+          </p>
+          <div class='row'>
+            <div class='col-sm-3'>
+              <div className='box-tableview-image'>
+                {path
+                  ? path.map((img, key) => {
+                      return (
+                        <div>
+                          <div className='form-group preview'>
+                            <div className='container'>
+                              <img
+                                src={'http://localhost:5000/' + img[0] || ' '}
+                                //    src={img[0]}
+                                alt='input Image'
+                                className='image'
+                                style={{
+                                  top: '10%',
+                                  left: '10%',
+                                  width: '100%',
+                                  height: '100%',
+                                  background: 'transparent',
+                                  borderRadius: '4%',
+                                  position: 'unset',
+                                }}
+                                onClick={() => {
+                                  setMainTable(img[0]);
+                                }}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })
+                  : ''}
               </div>
+            </div>
 
-              {/*  <iframe
-                src={'http://localhost:5000/' + fileImage || ' '}
-                width='100%'
+            {/*  <iframe
+          src={'http://localhost:5000/' + fileImage || ' '}
+          //      width='100%'
            />*/}
-              <>
-                <div className='col-sm-3'>
-                  <div className='modal-img'>
-                    <div className='form-group preview'>
-                      {/* <input
+            <>
+              <div className='col-sm-3'>
+                <div className='modal-img'>
+                  <div className='form-group preview'>
+                    {/* <input
                         type='text'
                         placeholder='part name'
                         onChange={handlePartName}
                      />*/}
-                      {fileImage ? (
-                        <div className='container'>
-                          <img
-                            // src={'http://localhost:5000/' + fileImage || ' '}
-                            src={fileImage || ' '}
-                            className='image'
-                            alt='input Image'
-                            onClick={() => setModalShow(true)}
-                          />
-                          <small style={{ color: 'orange' }}>
-                            *click to see full size image
-                          </small>
-                          <MyVerticallyCenteredModal
-                            show={modalShow}
-                            image={fileImage}
-                            onHide={() => setModalShow(false)}
-                          />
+                    {fileImage ? (
+                      <div className='container'>
+                        <img
+                          src={'http://localhost:5000/' + fileImage || ' '}
+                          //src={fileImage || ' '}
+                          className='image'
+                          alt='input Image'
+                          onClick={() => setModalShow(true)}
+                        />
+                        <small style={{ color: 'orange' }}>
+                          *click to see full size image
+                        </small>
+                        <MyVerticallyCenteredModal
+                          show={modalShow}
+                          image={fileImage}
+                          onHide={() => setModalShow(false)}
+                        />
+                      </div>
+                    ) : (
+                      <center>
+                        <div style={{ marginTop: '50%' }}>
+                          <img src={Group84} alt='%' style={{ width: '10%' }} />
+                          <br />
+                          <small>Select the drawing from</small>
+                          <br />
+                          <small>the left plane</small>
                         </div>
-                      ) : (
-                        <center>
-                          <div style={{ marginTop: '50%' }}>
-                            <img
-                              src={Group84}
-                              alt='%'
-                              style={{ width: '10%' }}
-                            />
-                            <br />
-                            <small>Select the drawing from</small>
-                            <br />
-                            <small>the left plane</small>
-                          </div>
-                        </center>
-                      )}
-                    </div>
+                      </center>
+                    )}
                   </div>
                 </div>
+              </div>
 
-                <div class='col-sm-6'>
-                  <div className='box-detections'>
-                    <h2
-                      style={{
-                        textAlign: 'left',
-                        font: 'normal normal 300 28px/32px Roboto',
-                        letterSpacing: '0px',
+              <div class='col-sm-6'>
+                <div className='box-detections'>
+                  <h2
+                    style={{
+                      textAlign: 'left',
+                      font: 'normal normal 300 28px/32px Roboto',
+                      letterSpacing: '0px',
 
-                        color: '#141414',
-                      }}
-                    >
-                      Detections
-                    </h2>
+                      color: '#141414',
+                    }}
+                  >
+                    Detections
+                  </h2>
 
-                    <table className='table'>
-                      <tbody>
-                        <div
-                          style={{
-                            textAlign: 'left',
-                            font: 'normal normal 300 15px/32px Roboto',
-                            letterSpacing: '0px',
-                            color: '#141414',
-                            background: '#F5F5F5',
-                          }}
-                        >
-                          <td>Detection Level</td>
-                          <td></td>
-                          <td>
-                            <span
-                              className='dot'
-                              style={{
-                                height: '10px',
-                                width: '10px',
-                                backgroundColor: '#98E52F',
-                                borderRadius: '50%',
-                                display: 'inline-block',
-                              }}
-                            />{' '}
-                            Good
-                          </td>
-                          <td>
-                            <span
-                              className='dot'
-                              style={{
-                                height: '10px',
-                                width: '10px',
-                                backgroundColor: '#05B1C7',
-                                borderRadius: '50%',
-                                display: 'inline-block',
-                              }}
-                            />{' '}
-                            Moderate
-                          </td>
-                          <td>
-                            <span
-                              className='dot'
-                              style={{
-                                height: '10px',
-                                width: '10px',
-                                backgroundColor: '#FF1515',
-                                borderRadius: '50%',
-                                display: 'inline-block',
-                              }}
-                            />{' '}
-                            Bad
-                          </td>
-                        </div>
-                        <br />
-                        <br />
-                        {selectImg && red
-                          ? Object.entries(red).map((value) => {
-                              return (
-                                <>
-                                  {value[1] ? (
-                                    <tr className='table'>
-                                      <td
+                  <table className='table'>
+                    <tbody>
+                      <div
+                        style={{
+                          textAlign: 'left',
+                          font: 'normal normal 300 15px/32px Roboto',
+                          letterSpacing: '0px',
+                          color: '#141414',
+                          background: '#F5F5F5',
+                        }}
+                      >
+                        <td>Detection Level</td>
+                        <td></td>
+                        <td>
+                          <span
+                            className='dot'
+                            style={{
+                              height: '10px',
+                              width: '10px',
+                              backgroundColor: '#98E52F',
+                              borderRadius: '50%',
+                              display: 'inline-block',
+                            }}
+                          />{' '}
+                          Good
+                        </td>
+                        <td>
+                          <span
+                            className='dot'
+                            style={{
+                              height: '10px',
+                              width: '10px',
+                              backgroundColor: '#05B1C7',
+                              borderRadius: '50%',
+                              display: 'inline-block',
+                            }}
+                          />{' '}
+                          Moderate
+                        </td>
+                        <td>
+                          <span
+                            className='dot'
+                            style={{
+                              height: '10px',
+                              width: '10px',
+                              backgroundColor: '#FF1515',
+                              borderRadius: '50%',
+                              display: 'inline-block',
+                            }}
+                          />{' '}
+                          Bad
+                        </td>
+                      </div>
+                      <br />
+                      <br />
+                      {selectImg && red
+                        ? Object.entries(red).map((value) => {
+                            return (
+                              <>
+                                {value[1] ? (
+                                  <tr className='table'>
+                                    <td
+                                      style={{
+                                        textAlign: 'left',
+                                        font:
+                                          'normal normal 300 15px/32px Roboto',
+                                        letterSpacing: '0px',
+                                        color: '#141414',
+                                      }}
+                                    >
+                                      {value[0]}&nbsp; &nbsp; &nbsp;&nbsp;
+                                      &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                                      {value[1]}
+                                    </td>
+
+                                    <td>
+                                      <span
+                                        className='dot'
                                         style={{
-                                          textAlign: 'left',
-                                          font:
-                                            'normal normal 300 15px/32px Roboto',
-                                          letterSpacing: '0px',
-                                          color: '#141414',
+                                          height: '10px',
+                                          width: '10px',
+                                          backgroundColor: '#FF1515',
+                                          borderRadius: '50%',
+                                          display: 'inline-block',
                                         }}
-                                      >
-                                        {value[0]}&nbsp; &nbsp; &nbsp;&nbsp;
-                                        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                                        {value[1]}
-                                      </td>
-
-                                      <td>
-                                        <span
-                                          className='dot'
-                                          style={{
-                                            height: '10px',
-                                            width: '10px',
-                                            backgroundColor: '#FF1515',
-                                            borderRadius: '50%',
-                                            display: 'inline-block',
-                                          }}
-                                        />
-                                      </td>
-                                    </tr>
-                                  ) : (
-                                    ' '
-                                  )}
-                                </>
-                              );
-                            })
-                          : ''}
-                        {/*  </tbody>
+                                      />
+                                    </td>
+                                  </tr>
+                                ) : (
+                                  ' '
+                                )}
+                              </>
+                            );
+                          })
+                        : ''}
+                      {/*  </tbody>
                     </table>
                     <table className='table'>
                     <tbody>*/}
-                        {selectImg && green
-                          ? Object.entries(green).map((value) => {
-                              return (
-                                <>
-                                  {value[1] ? (
-                                    <tr className='table'>
-                                      <td
+                      {selectImg && green
+                        ? Object.entries(green).map((value) => {
+                            return (
+                              <>
+                                {value[1] ? (
+                                  <tr className='table'>
+                                    <td
+                                      style={{
+                                        textAlign: 'left',
+                                        font:
+                                          'normal normal 300 15px/32px Roboto',
+                                        letterSpacing: '0px',
+                                        color: '#141414',
+                                      }}
+                                    >
+                                      {value[0]}&nbsp; &nbsp; &nbsp;&nbsp;
+                                      &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                                      {value[1]}
+                                    </td>
+
+                                    <td>
+                                      <span
+                                        className='dot'
                                         style={{
-                                          textAlign: 'left',
-                                          font:
-                                            'normal normal 300 15px/32px Roboto',
-                                          letterSpacing: '0px',
-                                          color: '#141414',
+                                          height: '10px',
+                                          width: '10px',
+                                          backgroundColor: '#98E52F',
+                                          borderRadius: '50%',
+                                          display: 'inline-block',
+                                          marginLeft: '10%',
                                         }}
-                                      >
-                                        {value[0]}&nbsp; &nbsp; &nbsp;&nbsp;
-                                        &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                                        {value[1]}
-                                      </td>
-
-                                      <td>
-                                        <span
-                                          className='dot'
-                                          style={{
-                                            height: '10px',
-                                            width: '10px',
-                                            backgroundColor: '#98E52F',
-                                            borderRadius: '50%',
-                                            display: 'inline-block',
-                                            marginLeft: '10%',
-                                          }}
-                                        />
-                                      </td>
-                                    </tr>
-                                  ) : (
-                                    ' '
-                                  )}
-                                </>
-                              );
-                            })
-                          : ''}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className='box-editInput'>
-                    <h2
-                      style={{
-                        textAlign: 'left',
-                        font: 'normal normal 300 28px/32px Roboto',
-                        letterSpacing: '0px',
-
-                        color: '#141414',
-                      }}
-                    >
-                      Add More
-                    </h2>
-                    <small style={{ color: 'orange' }}>
-                      **Please click on submit button once the detections are
-                      verified
-                    </small>
-                    {selectImg ? (
-                      <>
-                        <div>
-                          <table class='table '>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <input
-                                    type='text'
-                                    placeholder='Add Value'
-                                    name='input'
-                                    value={input}
-                                    onChange={(e) => onChange_Inputfield(e)}
-                                    style={{
-                                      background: '#FFFFFF ',
-                                      border: '1px solid #FF8000',
-                                      borderRadius: '7%',
-                                      padding: '2.7%',
-                                    }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type='text '
-                                    placeholder='Add Value'
-                                    name='output'
-                                    value={output}
-                                    onChange={(e) => onChange_outputField(e)}
-                                    style={{
-                                      background: '#FFFFFF ',
-                                      border: '1px solid #FF8000',
-                                      borderRadius: '7%',
-                                      padding: '2.7%',
-                                    }}
-                                  />
-                                </td>
-                                <td>
-                                  <img
-                                    src={exp53}
-                                    alt='#'
-                                    onClick={onManual_Add}
-                                    style={{ width: '37%', cursor: 'pointer' }}
-                                  />
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-                          <br />
-                          <table
-                            style={{
-                              'border-spacing': '5px',
-                              border: '1px solid black',
-                              'border-collapse': 'collapse',
-                            }}
-                          >
-                            <tbody>
-                              <tr>{handleTable()}</tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <br />
-                      </>
-                    ) : (
-                      ''
-                    )}
-
-                    {fileImage ? (
-                      <form onSubmit={(e) => onSubmit(e)}>
-                        <button
-                          className='btn btn-warning'
-                          type='submit'
-                          style={{
-                            padding: '2.7%',
-                            letterSpacing: '0px',
-                            lineHeight: '0',
-                            position: 'absolute',
-                            background: '#ff8000',
-                            color: '#ffffff',
-                            marginLeft: '4%',
-                            fontSize: '70%',
-                            textAlign: 'center',
-                            marginTop: '-2%',
-                            borderRadius: '11%',
-                          }}
-                        >
-                          Submit
-                        </button>
-                      </form>
-                    ) : (
-                      ''
-                    )}
-                    <br />
-
-                    {items.length === path.length ? (
-                      <div className='single-btn'>
-                        <Link
-                          to='/imagedetails'
-                          className='btn btn-warning'
-                          style={{
-                            padding: '2.7%',
-                            letterSpacing: '0px',
-                            lineHeight: '0',
-                            position: 'absolute',
-                            background: '#ff8000',
-                            color: '#ffffff',
-                            marginLeft: '50%',
-                            fontSize: '70%',
-                            textAlign: 'center',
-                            marginTop: '-5%',
-                            borderRadius: '11%',
-                          }}
-                        >
-                          Proceed
-                        </Link>
-                      </div>
-                    ) : (
-                      <small style={{ color: 'orange' }}>
-                        NOTE:Check all Images to proceed to next page
-                      </small>
-                    )}
-                  </div>
+                                      />
+                                    </td>
+                                  </tr>
+                                ) : (
+                                  ' '
+                                )}
+                              </>
+                            );
+                          })
+                        : ''}
+                    </tbody>
+                  </table>
                 </div>
-              </>
-            </div>
+                <div className='box-editInput'>
+                  <h2
+                    style={{
+                      textAlign: 'left',
+                      font: 'normal normal 300 28px/32px Roboto',
+                      letterSpacing: '0px',
+
+                      color: '#141414',
+                    }}
+                  >
+                    Add More
+                  </h2>
+                  <small style={{ color: 'orange' }}>
+                    **Please click on submit button once the detections are
+                    verified
+                  </small>
+                  {selectImg ? (
+                    <>
+                      <div>
+                        <table class='table '>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <input
+                                  type='text'
+                                  placeholder='Add Value'
+                                  name='input'
+                                  value={input}
+                                  onChange={(e) => onChange_Inputfield(e)}
+                                  style={{
+                                    background: '#FFFFFF ',
+                                    border: '1px solid #FF8000',
+                                    borderRadius: '7%',
+                                    padding: '2.7%',
+                                  }}
+                                />
+                              </td>
+                              <td>
+                                <input
+                                  type='text '
+                                  placeholder='Add Value'
+                                  name='output'
+                                  value={output}
+                                  onChange={(e) => onChange_outputField(e)}
+                                  style={{
+                                    background: '#FFFFFF ',
+                                    border: '1px solid #FF8000',
+                                    borderRadius: '7%',
+                                    padding: '2.7%',
+                                  }}
+                                />
+                              </td>
+                              <td>
+                                <img
+                                  src={exp53}
+                                  alt='#'
+                                  onClick={onManual_Add}
+                                  style={{ width: '37%', cursor: 'pointer' }}
+                                />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <br />
+                        <table
+                          style={{
+                            'border-spacing': '5px',
+                            border: '1px solid black',
+                            'border-collapse': 'collapse',
+                          }}
+                        >
+                          <tbody>
+                            <tr>{handleTable()}</tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <br />
+                    </>
+                  ) : (
+                    ''
+                  )}
+
+                  {fileImage ? (
+                    <form onSubmit={(e) => onSubmit(e)}>
+                      <button
+                        className='btn btn-warning'
+                        type='submit'
+                        style={{
+                          padding: '2.7%',
+                          letterSpacing: '0px',
+                          lineHeight: '0',
+                          position: 'absolute',
+                          background: '#ff8000',
+                          color: '#ffffff',
+                          marginLeft: '4%',
+                          fontSize: '70%',
+                          textAlign: 'center',
+                          marginTop: '-2%',
+                          borderRadius: '11%',
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  ) : (
+                    ''
+                  )}
+                  <br />
+
+                  {path && items && items.length === path.length ? (
+                    <div className='single-btn'>
+                      <Link
+                        to='/imagedetails'
+                        className='btn btn-warning'
+                        style={{
+                          padding: '2.7%',
+                          letterSpacing: '0px',
+                          lineHeight: '0',
+                          position: 'absolute',
+                          background: '#ff8000',
+                          color: '#ffffff',
+                          marginLeft: '50%',
+                          fontSize: '70%',
+                          textAlign: 'center',
+                          marginTop: '-5%',
+                          borderRadius: '11%',
+                        }}
+                      >
+                        Proceed
+                      </Link>
+                    </div>
+                  ) : (
+                    <small style={{ color: 'orange' }}>
+                      NOTE:Check all Images to proceed to next page
+                    </small>
+                  )}
+                </div>
+              </div>
+            </>
           </div>
         </div>
-      </Fragment>
-    );
-  } catch (error) {
+      </div>
+    </Fragment>
+  );
+  /*} catch (error) {
     return (
       <h1>
         <br />
@@ -621,7 +619,7 @@ function TableDetails(props) {
         </div>
       </h1>
     );
-  }
+  }*/
 }
 
 export default TableDetails;

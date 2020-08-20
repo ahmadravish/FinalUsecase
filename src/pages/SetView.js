@@ -30,197 +30,200 @@ function SetView() {
     }
   }, []);
 
-  try {
-    //for (var i = 0; i < fileObj.length; i++)
-    // console.log(fileObj[0][0]);
-    // console.log(fileObj[0][1]);
-    //console.log(Template);
+  //try {
+  //for (var i = 0; i < fileObj.length; i++)
+  // console.log(fileObj[0][0]);
+  // console.log(fileObj[0][1]);
+  //console.log(Template);
 
-    const handleView = (e) => {
-      // console.log(e.target);
-      // console.log(e.target.value);
+  const handleView = (e) => {
+    // console.log(e.target);
+    // console.log(e.target.value);
 
-      setView(e.target.value);
-    };
+    setView(e.target.value);
+  };
 
-    const currentImagefun = (img) => {
-      setCurrentImage(img);
-    };
+  const currentImagefun = (img) => {
+    setCurrentImage(img);
+  };
 
-    const imageSetCurrentPath = (key, item) => {
-      setCurrentPath(key);
-      //  console.log(currentPath);
-      if (items.indexOf(item) === -1) items.push(item);
-    };
+  const imageSetCurrentPath = (key, item) => {
+    setCurrentPath(key);
+    //  console.log(currentPath);
+    if (items.indexOf(item) === -1) items.push(item);
+  };
 
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
-    const uploadView = (e) => {
-      e.preventDefault();
-      setCountViews(countViews + 1);
-      // console.log(currentPath);
-      console.log(View);
-      console.log(currentImage);
+  const uploadView = (e) => {
+    e.preventDefault();
+    setCountViews(countViews + 1);
+    // console.log(currentPath);
+    console.log(View);
+    console.log(currentImage);
 
-      const body = new FormData();
-      //add path acc to image and install npm i babel-preset-es2015
-      body.set('Image', currentImage);
-      body.set('view', View);
+    const body = new FormData();
+    //add path acc to image and install npm i babel-preset-es2015
+    body.set('Image', currentImage);
+    body.set('view', View);
 
-      /*for (var [key, value] of body.entries()) {
+    /*for (var [key, value] of body.entries()) {
         console.log(key, value);
       }*/
 
-      axios({
-        method: 'post',
-        data: body,
-        url: 'http://localhost:5000/set_view',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'User-token': '11111111111111111111111111111111',
-        },
+    axios({
+      method: 'post',
+      data: body,
+      url: 'http://localhost:5000/set_view',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'User-token': '11111111111111111111111111111111',
+      },
+    })
+      .then((resp) => {
+        console.log('success set view');
+        setSuccess(true);
+        localStorage.setItem('countViews', JSON.stringify(countViews + 1));
+        setTimeout(function () {
+          setSuccess(false);
+        }, 2000);
       })
-        .then((resp) => {
-          console.log('success set view');
-          setSuccess(true);
-          localStorage.setItem('countViews', JSON.stringify(countViews + 1));
-          setTimeout(function () {
-            setSuccess(false);
-          }, 2000);
-        })
-        .catch((err) => console.error(err));
-    };
+      .catch((err) => console.error(err));
+  };
 
-    if (currentPath) {
-      var re = Object.entries(currentPath);
-      // console.log(re[0][0]);
-    }
+  if (currentPath) {
+    var re = Object.entries(currentPath);
+    // console.log(re[0][0]);
+  }
 
-    if (Template === 'Liquid Telecom') {
-      return (
-        <div>
-          <Navbar />
-          <h1 className='cnt-img'>
-            {path.length === 1 ? (
-              <p>{path.length} Pdf Loaded</p>
-            ) : (
-              <p>{path.length} Pdfs Loaded</p>
-            )}
-          </h1>
-          <div className='row'>
-            <div
-              class='col-sm-4'
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                marginTop: '30px',
-                position: 'unset',
-              }}
-            >
-              {path.map((img, key) => {
-                return (
-                  <div className='box-tableview-image'>
-                    <div className='form-group preview'>
-                      <img src={pdf || ' '} alt='input Image' />
+  if (Template === 'Liquid Telecom') {
+    return (
+      <div>
+        <Navbar />
+        <h1 className='cnt-img'>
+          {path.length === 1 ? (
+            <p>{path.length} Pdf Loaded</p>
+          ) : (
+            <p>{path.length} Pdfs Loaded</p>
+          )}
+        </h1>
+        <div className='row'>
+          <div
+            class='col-sm-4'
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              marginTop: '30px',
+              position: 'unset',
+            }}
+          >
+            {path
+              ? path.map((img, key) => {
+                  return (
+                    <div className='box-tableview-image'>
+                      <div className='form-group preview'>
+                        <img src={pdf || ' '} alt='input Image' />
+                      </div>
+                      <br />
+                      <button
+                        className='btn btn-warning'
+                        onClick={() => {
+                          imageSetCurrentPath(img[1], img[0]);
+                        }}
+                      >
+                        select
+                      </button>
+                      <br />
+                      <br />
                     </div>
-                    <br />
-                    <button
-                      className='btn btn-warning'
-                      onClick={() => {
-                        imageSetCurrentPath(img[1], img[0]);
-                      }}
-                    >
-                      select
-                    </button>
-                    <br />
-                    <br />
-                  </div>
-                );
-              })}
+                  );
+                })
+              : ''}
+          </div>
+
+          <div className='box-read-gallery'>
+            <div className='setview-center'>
+              {currentPath
+                ? re.map((i, key) => {
+                    return (
+                      <div className='form-group preview'>
+                        <div className='setview-single'>
+                          {currentPath ? (
+                            <img
+                              //src={'http://localhost:5000/' + i[0]}
+                              src={i[0]}
+                              //  alt='#'
+                            />
+                          ) : (
+                            ' '
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })
+                : ' '}
             </div>
 
-            <div className='box-read-gallery'>
-              <div className='setview-center'>
-                {currentPath
-                  ? re.map((i, key) => {
-                      return (
-                        <div className='form-group preview'>
-                          <div className='setview-single'>
-                            {currentPath ? (
-                              <img
-                                //src={'http://localhost:5000/' + i[0]}
-                                src={i[0]}
-                                alt='#'
-                              />
-                            ) : (
-                              ' '
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })
-                  : ' '}
-              </div>
-
-              <div className='single-btn'>
-                <Link to='/pdftable' className='btn btn-warning btn-lg'>
-                  Continue
-                </Link>
-              </div>
+            <div className='single-btn'>
+              <Link to='/pdftable' className='btn btn-warning btn-lg'>
+                Continue
+              </Link>
             </div>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    return (
-      <Fragment>
-        <div className='background-login'>
-          <Navbar />
-          <div style={{ 'margin-left': '7%' }}>
-            {/* <h1 className='cnt-img'>
+  return (
+    <Fragment>
+      <div className='background-login'>
+        <Navbar />
+        <div style={{ 'margin-left': '7%' }}>
+          {/* <h1 className='cnt-img'>
               {path.length === 1 ? (
                 <p>{path.length} Image Loaded</p>
               ) : (
                 <p>{path.length} Images Loaded</p>
               )}
             </h1>*/}
-            <p className='cnt-img' style={{ color: 'orange' }}>
-              **Please select a file to start processing
-            </p>
-            <div class='row'>
-              <div class='col-sm-4 '>
-                <div className='box-tableview-image'>
-                  {path.map((img, key) => {
-                    return (
-                      <div>
-                        <div className='form-group preview'>
-                          <div class='container'>
-                            <img
-                              src={img[0] || ''}
-                              //src={'http://localhost:5000/' + img[0] || ' '}
-                              alt='input Image'
-                              className='image'
-                              style={{
-                                top: '10%',
-                                left: '10%',
-                                width: '100%',
-                                height: '100%',
-                                background: 'transparent',
-                                borderRadius: '4%',
-                                position: 'unset',
-                              }}
-                              onClick={() => {
-                                imageSetCurrentPath(img[1], img[0]);
-                              }}
-                            />
-                            <br />
-                            {/* <div class='middle'>
+          <p className='cnt-img' style={{ color: 'orange' }}>
+            **Please select a file to start processing
+          </p>
+          <div class='row'>
+            <div class='col-sm-4 '>
+              <div className='box-tableview-image'>
+                {path
+                  ? path.map((img, key) => {
+                      return (
+                        <div>
+                          <div className='form-group preview'>
+                            <div class='container'>
+                              <img
+                                src={img[0] || ''}
+                                //src={'http://localhost:5000/' + img[0] || ' '}
+                                alt='input Image'
+                                className='image'
+                                style={{
+                                  top: '10%',
+                                  left: '10%',
+                                  width: '100%',
+                                  height: '100%',
+                                  background: 'transparent',
+                                  borderRadius: '4%',
+                                  position: 'unset',
+                                }}
+                                onClick={() => {
+                                  imageSetCurrentPath(img[1], img[0]);
+                                }}
+                              />
+                              <br />
+                              {/* <div class='middle'>
                               <img
                                 src={six}
                                 alt='#'
@@ -229,184 +232,181 @@ function SetView() {
                                 }}
                               />
                               </div>*/}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div>
-                  <div
-                    style={{
-                      marginLeft: '100%',
-                      width: '200%',
-                      marginTop: '-23%',
-                    }}
-                  >
-                    {items.length === path.length ? (
-                      <div className='single-btn'>
-                        <Link
-                          to='/tabledetails'
-                          className='btn btn-warning '
-                          style={{
-                            padding: '3.7%',
-                            letterSpacing: '0px',
-                            lineHeight: '0',
-                            position: 'absolute',
-                            background: '#ff8000',
-                            color: '#ffffff',
-                            width: '30%',
+                      );
+                    })
+                  : ''}
+              </div>
+              <div>
+                <div
+                  style={{
+                    marginLeft: '100%',
+                    width: '200%',
+                    marginTop: '-23%',
+                  }}
+                >
+                  {path && items.length === path.length ? (
+                    <div className='single-btn'>
+                      <Link
+                        to='/tabledetails'
+                        className='btn btn-warning '
+                        style={{
+                          padding: '3.7%',
+                          letterSpacing: '0px',
+                          lineHeight: '0',
+                          position: 'absolute',
+                          background: '#ff8000',
+                          color: '#ffffff',
+                          width: '30%',
 
-                            marginLeft: '160%',
-                            fontSize: '60%',
-                            textAlign: 'center',
-                            marginTop: '20%',
-                            borderRadius: '6%',
-                          }}
-                        >
-                          CONFIRM &amp; PROCEED
-                        </Link>
-                      </div>
-                    ) : (
-                      <p
-                        className='cnt-img'
-                        style={{ color: 'orange', marginBottom: '-6%' }}
+                          marginLeft: '160%',
+                          fontSize: '60%',
+                          textAlign: 'center',
+                          marginTop: '20%',
+                          borderRadius: '6%',
+                        }}
                       >
-                        NOTE:Set all Images to proceed to next page
-                      </p>
-                    )}
-                  </div>
-                  {currentPath ? (
-                    <div className='setview-center'>
-                      {/*style={{ 'margin-left': '2%', width: '80%', height: '5%' }} */}
-                      <h1>Set View</h1>
-                      {/* <h2>{currentPath ? currentPath[0] : ''}</h2>*/}
-                      {success ? (
-                        View === 'remove' ? (
-                          <h5 class='text-success'>View Removed</h5>
-                        ) : (
-                          <h5 class='text-success'>{View} view set</h5>
-                        )
-                      ) : (
-                        ' '
-                      )}
-                      <div className='grid-setview'>
-                        {currentPath
-                          ? re.map((i) => {
-                              return (
-                                <div className='form-group preview'>
-                                  <div
-                                    className='setview-single'
-                                    style={{
-                                      display: 'flex',
-                                      justifyContent: 'space-around',
-                                    }}
-                                  >
-                                    {currentPath ? (
-                                      <img
-                                        //src={'http://localhost:5000/' + i[0]}
-                                        src={i[0]}
-                                        style={{ width: '37%', height: 'auto' }}
-                                        alt='#'
-                                      />
-                                    ) : (
-                                      ' '
-                                    )}
-                                    <br />
-
-                                    {path ? (
-                                      <form onSubmit={uploadView}>
-                                        <div class='input-group sm-3'>
-                                          <div class='col-xs-4'>
-                                            <p style={{ color: 'orange' }}>
-                                              Predicted view: {i[1]}
-                                            </p>
-                                            <select
-                                              value={i[1].View}
-                                              onChange={(e) => {
-                                                handleView(e);
-                                                currentImagefun(i[0]);
-                                              }}
-                                              class='custom-select'
-                                              id='inputGroupSelect02'
-                                              style={{
-                                                width: '70%',
-                                                marginLeft: '6%',
-                                                position: 'unset',
-                                                padding: '0%',
-                                              }}
-                                            >
-                                              <option selected>
-                                                select View
-                                              </option>
-                                              <option value='front'>
-                                                Front
-                                              </option>
-                                              <option value='top'>Top</option>
-                                              <option value='bottom'>
-                                                Bottom
-                                              </option>
-                                              <option value='left'>Left</option>
-                                              <option value='right'>
-                                                Right
-                                              </option>
-                                              <option value='isometric'>
-                                                Isometric
-                                              </option>
-                                              <option value='assembly'>
-                                                Assembly
-                                              </option>
-                                              <option value='remove'>
-                                                Remove
-                                              </option>
-                                            </select>
-                                          </div>
-                                        </div>
-                                        <br />
-                                        <button
-                                          className='btn btn-warning'
-                                          style={{
-                                            position: 'relative',
-                                            fontSize: 'smaller',
-                                            marginLeft: '6%',
-                                          }}
-                                        >
-                                          Set View
-                                        </button>
-                                      </form>
-                                    ) : (
-                                      ' '
-                                    )}
-                                  </div>
-                                </div>
-                              );
-                            })
-                          : ' '}
-                      </div>
-
-                      <br />
-                      <br />
-                      <br />
-                      <center>
-                        <button
-                          className='btn btn-warning'
-                          onClick={scrollToTop}
-                        >
-                          Scroll Up
-                        </button>
-                      </center>
+                        CONFIRM &amp; PROCEED
+                      </Link>
                     </div>
                   ) : (
-                    ''
+                    <p
+                      className='cnt-img'
+                      style={{ color: 'orange', marginBottom: '-6%' }}
+                    >
+                      NOTE:Set all Images to proceed to next page
+                    </p>
                   )}
                 </div>
+                {currentPath ? (
+                  <div className='setview-center'>
+                    {/*style={{ 'margin-left': '2%', width: '80%', height: '5%' }} */}
+                    <h1>Set View</h1>
+                    {/* <h2>{currentPath ? currentPath[0] : ''}</h2>*/}
+                    {success ? (
+                      View === 'remove' ? (
+                        <h5 class='text-success'>View Removed</h5>
+                      ) : (
+                        <h5 class='text-success'>{View} view set</h5>
+                      )
+                    ) : (
+                      ' '
+                    )}
+                    <div
+                      className='grid-setview'
+                      style={{ gridColumnGap: '6.5%', gridRowGap: '15%' }}
+                    >
+                      {currentPath
+                        ? re.map((i) => {
+                            return (
+                              <div className='form-group preview'>
+                                <div
+                                  className='setview-single'
+                                  style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-around',
+                                  }}
+                                >
+                                  {currentPath ? (
+                                    <img
+                                      //src={'http://localhost:5000/' + i[0]}
+                                      src={i[0]}
+                                      style={{ width: '37%', height: 'auto' }}
+                                      alt='#'
+                                    />
+                                  ) : (
+                                    ' '
+                                  )}
+                                  <br />
+
+                                  {path ? (
+                                    <form onSubmit={uploadView}>
+                                      <div class='input-group sm-3'>
+                                        <div class='col-xs-4'>
+                                          <p style={{ color: 'orange' }}>
+                                            Predicted view: {i[1]}
+                                          </p>
+                                          <select
+                                            value={i[1].View}
+                                            onChange={(e) => {
+                                              handleView(e);
+                                              currentImagefun(i[0]);
+                                            }}
+                                            class='custom-select'
+                                            id='inputGroupSelect02'
+                                            style={{
+                                              width: '70%',
+                                              marginLeft: '6%',
+                                              position: 'unset',
+                                              padding: '0%',
+                                            }}
+                                          >
+                                            <option selected>
+                                              select View
+                                            </option>
+                                            <option value='front'>Front</option>
+                                            <option value='top'>Top</option>
+                                            <option value='bottom'>
+                                              Bottom
+                                            </option>
+                                            <option value='left'>Left</option>
+                                            <option value='right'>Right</option>
+                                            <option value='isometric'>
+                                              Isometric
+                                            </option>
+                                            <option value='assembly'>
+                                              Assembly
+                                            </option>
+                                            <option value='invalid'>
+                                              Invalid
+                                            </option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <br />
+                                      <button
+                                        className='btn btn-warning'
+                                        style={{
+                                          position: 'relative',
+                                          fontSize: 'smaller',
+                                          marginLeft: '6%',
+                                        }}
+                                      >
+                                        Set View
+                                      </button>
+                                    </form>
+                                  ) : (
+                                    ' '
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })
+                        : ' '}
+                    </div>
+
+                    <br />
+                    <br />
+                    <br />
+                    <center>
+                      <button className='btn btn-warning' onClick={scrollToTop}>
+                        Scroll Up
+                      </button>
+                    </center>
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           </div>
         </div>
-      </Fragment>
-    );
-  } catch (error) {
+      </div>
+    </Fragment>
+  );
+  /* } catch (error) {
     return (
       <h1>
         <br />
@@ -425,7 +425,7 @@ function SetView() {
         </div>
       </h1>
     );
-  }
+  }*/
 }
 
 export default SetView;
