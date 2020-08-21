@@ -114,7 +114,7 @@ const ImageDetails = () => {
                 }}
               >
                 <img src={dwnld} alt='#' style={{ width: '12%' }} />
-                &nbsp;&nbsp; DOWNLOAD AS PDF
+                &nbsp;&nbsp; DOWNLOAD AS ZIP
               </Link>
               <Link
                 to='hero'

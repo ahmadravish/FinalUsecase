@@ -125,12 +125,13 @@ function PdfTable() {
       <Navbar />
       <div className='background-login' style={{ position: 'unset' }}>
         <div style={{ 'margin-left': '7%' }}>
-          <p className='cnt-img' style={{ color: 'orange' }}>
-            **Please select a file to start processing
-          </p>
+          <p className='cnt-img' style={{ color: 'orange' }}></p>
           <div className='row'>
             <div class='col-sm-3'>
-              <div className='box-tableview-image'>
+              <div
+                className='box-tableview-image '
+                style={{ marginLeft: '40%' }}
+              >
                 {path
                   ? path.map((img, key) => {
                       return (
@@ -138,7 +139,8 @@ function PdfTable() {
                           <div className='form-group preview'>
                             <div className='container'>
                               <img
-                                src={pdf || ' '}
+                                src={'http://localhost:5000/' + img[0] || ' '}
+                                //src={img[0] || ' '}
                                 alt='input Image'
                                 className='image'
                                 style={{
@@ -165,12 +167,42 @@ function PdfTable() {
 
             <>
               <div class='col-sm-3'>
-                <div className='modal-img' style={{ height: '115%' }}>
+                {items && path && items.length === path.length ? (
+                  <div className='single-btn'>
+                    <Link
+                      to='/imagedetails'
+                      className='btn btn-warning '
+                      style={{
+                        padding: '4.7%',
+                        letterSpacing: '0px',
+                        lineHeight: '0',
+                        position: 'absolute',
+                        background: '#ff8000',
+                        color: '#ffffff',
+                        marginLeft: '40%',
+                        width: '30%',
+                        height: '3%',
+                        fontSize: '70%',
+                        textAlign: 'center',
+                        marginTop: '-5%',
+                        borderRadius: '7%',
+                      }}
+                    >
+                      PROCEED
+                    </Link>
+                  </div>
+                ) : (
+                  <small style={{ color: 'orange' }}>
+                    NOTE:Check all Pdfs to proceed to next page
+                  </small>
+                )}
+                <div className='modal-img' style={{ height: '75%' }}>
                   <div className='form-group preview'>
                     {fileImage ? (
                       <iframe
-                        height='900px'
-                        width='300px'
+                        zoom='200%'
+                        borderRadius='10%'
+                        width='100%'
                         src={'http://localhost:5000/' + fileImage}
                         //src={img[0]}
                       />
@@ -195,7 +227,7 @@ function PdfTable() {
                   <h1
                     style={{
                       textAlign: 'left',
-                      font: 'normal normal 300 28px/32px Roboto',
+                      font: 'normal normal normal 28px/32px Roboto',
                       letterSpacing: '0px',
 
                       color: '#141414',
@@ -210,7 +242,19 @@ function PdfTable() {
                         ? Object.entries(inputTable).map((ele, key) => (
                             <tr>
                               {key === 0
-                                ? ele[1].map((ele2) => <th>{ele2}</th>)
+                                ? ele[1].map((ele2) => (
+                                    <th
+                                      style={{
+                                        textAlign: 'left',
+                                        font:
+                                          'normal normal normal 15px/32px Roboto',
+                                        letterSpacing: '0px',
+                                        color: '#141414',
+                                      }}
+                                    >
+                                      {ele2}
+                                    </th>
+                                  ))
                                 : ele[1].map((ele2) => {
                                     return (
                                       <>
@@ -218,7 +262,7 @@ function PdfTable() {
                                           style={{
                                             textAlign: 'left',
                                             font:
-                                              'normal normal 300 15px/32px Roboto',
+                                              'normal normal normal 15px/32px Roboto',
                                             letterSpacing: '0px',
                                             color: '#141414',
                                           }}
@@ -336,32 +380,6 @@ function PdfTable() {
                     ''
                   )}
                   <br />
-                  {items && path && items.length === path.length ? (
-                    <div className='single-btn'>
-                      <Link
-                        to='/imagedetails'
-                        className='btn btn-warning '
-                        style={{
-                          padding: '2.7%',
-                          letterSpacing: '0px',
-                          lineHeight: '0',
-                          position: 'absolute',
-
-                          marginLeft: '70%',
-                          fontSize: '70%',
-                          textAlign: 'center',
-
-                          borderRadius: '11%',
-                        }}
-                      >
-                        Proceed
-                      </Link>
-                    </div>
-                  ) : (
-                    <small style={{ color: 'orange' }}>
-                      NOTE:Check all Pdfs to proceed to next page
-                    </small>
-                  )}
                 </div>
               </div>
             </>

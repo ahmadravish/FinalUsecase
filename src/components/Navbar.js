@@ -148,7 +148,7 @@ class Navbar extends React.Component {
                             width: '20%',
 
                             position: 'absolute',
-                            top: '35%',
+                            top: '40%',
                             left: '10%',
                           }}
                         />
@@ -158,7 +158,7 @@ class Navbar extends React.Component {
                             top: '35%',
                             left: '30%',
                             'font-size': '10px',
-                            marginTop: '10px',
+                            marginTop: '16%',
                           }}
                         >
                           <h5 className='text-white'> Upload </h5>
@@ -170,9 +170,8 @@ class Navbar extends React.Component {
                         style={{
                           width: '50%',
                           position: 'absolute',
-                          top: '35%',
+                          top: '40%',
                           left: '30%',
-                          marginTop: '10px',
                         }}
                       />
                     )}
@@ -191,14 +190,14 @@ class Navbar extends React.Component {
                           style={{
                             width: '20%',
                             position: 'absolute',
-                            top: '45%',
+                            top: '55%',
                             left: '10%',
                           }}
                         ></img>
                         <div
                           style={{
                             position: 'absolute',
-                            top: '45%',
+                            top: '55%',
                             left: '30%',
                             'font-size': '10px',
                             marginTop: '10px',
@@ -213,9 +212,8 @@ class Navbar extends React.Component {
                         style={{
                           width: '50%',
                           position: 'absolute',
-                          top: '45%',
+                          top: '55%',
                           left: '30%',
-                          marginTop: '10px',
                         }}
                       />
                     )}
@@ -244,7 +242,6 @@ class Navbar extends React.Component {
                             top: '75%',
                             left: '30%',
                             'font-size': '10px',
-                            marginTop: '10px',
                           }}
                         >
                           <h5 className='text-white'> Add User </h5>
@@ -287,7 +284,6 @@ class Navbar extends React.Component {
                             top: '85%',
                             left: '30%',
                             'font-size': '10px',
-                            marginTop: '10px',
                           }}
                         >
                           <h5 className='text-white'> Logout </h5>

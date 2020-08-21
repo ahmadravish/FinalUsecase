@@ -135,16 +135,14 @@ const Read = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: '-40px',
+                marginBottom: '40px',
               }}
             >
               <img src={Group44} alt='#' style={{ width: '17%' }}></img>
               <h3> Add Image</h3>
             </div>
             <br />
-            <br />
-            <br />
-            <br />
+
             <div class='input-group sm-3'>
               <div class='col-xs-4'>
                 <select
@@ -198,7 +196,7 @@ const Read = () => {
                         >
                           Upload your file
                         </h5>
-                        <p style={{ marginLeft: '1%', marginTop: '-12%' }}>
+                        <p style={{ marginLeft: '13%', marginTop: '-8%' }}>
                           .pdf
                         </p>
                       </li>
@@ -259,7 +257,7 @@ const Read = () => {
                         <p
                           style={{
                             marginLeft: '1%',
-                            marginTop: '-12%',
+                            marginTop: '-8%',
                             font: ' normal normal normal 16px/21px Roboto',
                             letterSpacing: '0px',
                           }}
@@ -371,10 +369,9 @@ const Read = () => {
           </div>
           {uploadStatus ? (
             <div className='col-sm-4'>
-              <div className='box-read-gallery' style={{ width: '110%' }}>
+              <div className='box-read-gallery'>
                 {Template === 'Liquid Telecom' ? (
                   <>
-                    <h5 style={{ color: 'orange' }}>Pdf Uploaded Success</h5>
                     <div>
                       <Link
                         to='/pdftable'
@@ -413,7 +410,11 @@ const Read = () => {
                     </div>
                     {uploadStatus ? (
                       Template == 'Liquid Telecom' ? (
-                        ''
+                        <>
+                          <br />
+                          <br />
+                          <br />
+                        </>
                       ) : (
                         <div>
                           <Link
@@ -424,6 +425,7 @@ const Read = () => {
                               padding: '2.4%',
                               width: '20%',
                               marginLeft: '6%',
+                              marginTop: '-5%',
                             }}
                           >
                             CONTINUE

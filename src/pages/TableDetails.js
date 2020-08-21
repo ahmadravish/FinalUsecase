@@ -60,8 +60,8 @@ function TableDetails(props) {
     let tmp = JSON.parse(localStorage.getItem('Template'));
     let ti = JSON.parse(localStorage.getItem('Time'));
     let vi = JSON.parse(localStorage.getItem('countViews'));
-    if (pt != null && tmp !== null && ti !== null && vi !== null) {
-      setPath(pt);
+    if (pt != null) setPath(pt);
+    if (tmp !== null && ti !== null) {
       setTemplate(tmp);
       setTime(ti);
       setCountViews(vi);
@@ -132,24 +132,26 @@ function TableDetails(props) {
       return (
         <tr>
           <td
-            style={{
-              width: '100px',
-              'border-spacing': '5px',
-              border: '1px solid black',
-              'border-collapse': 'collapse',
-            }}
             key={index}
+            style={{
+              textAlign: 'left',
+              font: 'normal normal 300 15px/32px Roboto',
+              letterSpacing: '0px',
+              color: '#141414',
+            }}
           >
             {key[0]}
           </td>
+          <td></td>
+          <td></td>
           <td
-            style={{
-              width: '100px',
-              'border-spacing': '5px',
-              border: '1px solid black',
-              'border-collapse': 'collapse',
-            }}
             key={index}
+            style={{
+              textAlign: 'left',
+              font: 'normal normal 300 15px/32px Roboto',
+              letterSpacing: '0px',
+              color: '#141414',
+            }}
           >
             {key[1]}
           </td>
@@ -213,12 +215,13 @@ function TableDetails(props) {
       <Navbar />
       <div className='background-login' style={{ position: 'unset' }}>
         <div style={{ 'margin-left': '7%' }}>
-          <p className='cnt-img' style={{ color: 'orange' }}>
-            **Please select a file to start processing
-          </p>
+          <p className='cnt-img' style={{ color: 'orange' }}></p>
           <div class='row'>
             <div class='col-sm-3'>
-              <div className='box-tableview-image'>
+              <div
+                className='box-tableview-image'
+                style={{ marginLeft: '43%' }}
+              >
                 {path
                   ? path.map((img, key) => {
                       return (
@@ -226,8 +229,8 @@ function TableDetails(props) {
                           <div className='form-group preview'>
                             <div className='container'>
                               <img
-                                src={'http://localhost:5000/' + img[0] || ' '}
-                                //    src={img[0]}
+                                // src={'http://localhost:5000/' + img[0] || ' '}
+                                src={img[0]}
                                 alt='input Image'
                                 className='image'
                                 style={{
@@ -252,10 +255,6 @@ function TableDetails(props) {
               </div>
             </div>
 
-            {/*  <iframe
-          src={'http://localhost:5000/' + fileImage || ' '}
-          //      width='100%'
-           />*/}
             <>
               <div className='col-sm-3'>
                 <div className='modal-img'>
@@ -267,7 +266,13 @@ function TableDetails(props) {
                      />*/}
                     {fileImage ? (
                       <div className='container'>
-                        <img
+                        <iframe
+                          src={'http://localhost:5000/' + fileImage || ' '}
+                          width='100%'
+                          borderRadius='10%'
+                          zoom='200%'
+                        />
+                        {/* <img
                           src={'http://localhost:5000/' + fileImage || ' '}
                           //src={fileImage || ' '}
                           className='image'
@@ -281,7 +286,7 @@ function TableDetails(props) {
                           show={modalShow}
                           image={fileImage}
                           onHide={() => setModalShow(false)}
-                        />
+                       />*/}
                       </div>
                     ) : (
                       <center>
@@ -296,6 +301,35 @@ function TableDetails(props) {
                     )}
                   </div>
                 </div>
+                {path && items && items.length === path.length ? (
+                  <div className='single-btn'>
+                    <Link
+                      to='/imagedetails'
+                      className='btn btn-warning'
+                      style={{
+                        padding: '4.7%',
+                        letterSpacing: '0px',
+                        lineHeight: '0',
+                        position: 'absolute',
+                        background: '#ff8000',
+                        color: '#ffffff',
+                        marginLeft: '40%',
+                        width: '30%',
+                        height: '3%',
+                        fontSize: '70%',
+                        textAlign: 'center',
+                        marginTop: '-5%',
+                        borderRadius: '7%',
+                      }}
+                    >
+                      PROCEED
+                    </Link>
+                  </div>
+                ) : (
+                  <small style={{ color: 'orange', marginLeft: '15%' }}>
+                    NOTE:Check all Images to proceed to next page
+                  </small>
+                )}
               </div>
 
               <div class='col-sm-6'>
@@ -338,19 +372,7 @@ function TableDetails(props) {
                           />{' '}
                           Good
                         </td>
-                        <td>
-                          <span
-                            className='dot'
-                            style={{
-                              height: '10px',
-                              width: '10px',
-                              backgroundColor: '#05B1C7',
-                              borderRadius: '50%',
-                              display: 'inline-block',
-                            }}
-                          />{' '}
-                          Moderate
-                        </td>
+                        <td></td>
                         <td>
                           <span
                             className='dot'
@@ -471,6 +493,13 @@ function TableDetails(props) {
                     **Please click on submit button once the detections are
                     verified
                   </small>
+                  <table className='table'>
+                    <tbody>
+                      <tr>{handleTable()}</tr>
+                    </tbody>
+                  </table>
+                  <br />
+                  <br />
                   {selectImg ? (
                     <>
                       <div>
@@ -520,17 +549,6 @@ function TableDetails(props) {
                         </table>
 
                         <br />
-                        <table
-                          style={{
-                            'border-spacing': '5px',
-                            border: '1px solid black',
-                            'border-collapse': 'collapse',
-                          }}
-                        >
-                          <tbody>
-                            <tr>{handleTable()}</tr>
-                          </tbody>
-                        </table>
                       </div>
                       <br />
                     </>
@@ -564,34 +582,6 @@ function TableDetails(props) {
                     ''
                   )}
                   <br />
-
-                  {path && items && items.length === path.length ? (
-                    <div className='single-btn'>
-                      <Link
-                        to='/imagedetails'
-                        className='btn btn-warning'
-                        style={{
-                          padding: '2.7%',
-                          letterSpacing: '0px',
-                          lineHeight: '0',
-                          position: 'absolute',
-                          background: '#ff8000',
-                          color: '#ffffff',
-                          marginLeft: '50%',
-                          fontSize: '70%',
-                          textAlign: 'center',
-                          marginTop: '-5%',
-                          borderRadius: '11%',
-                        }}
-                      >
-                        Proceed
-                      </Link>
-                    </div>
-                  ) : (
-                    <small style={{ color: 'orange' }}>
-                      NOTE:Check all Images to proceed to next page
-                    </small>
-                  )}
                 </div>
               </div>
             </>

@@ -155,8 +155,8 @@ function SetView() {
                         <div className='setview-single'>
                           {currentPath ? (
                             <img
-                              //src={'http://localhost:5000/' + i[0]}
-                              src={i[0]}
+                              src={'http://localhost:5000/' + i[0]}
+                              //src={i[0]}
                               //  alt='#'
                             />
                           ) : (
@@ -225,8 +225,8 @@ function SetView() {
                               <br />
                               {/* <div class='middle'>
                               <img
-                                src={six}
-                                alt='#'
+                            src={six}
+                            //    alt='#'
                                 onClick={() => {
                                   imageSetCurrentPath(img[1], img[0]);
                                 }}
@@ -386,15 +386,6 @@ function SetView() {
                           })
                         : ' '}
                     </div>
-
-                    <br />
-                    <br />
-                    <br />
-                    <center>
-                      <button className='btn btn-warning' onClick={scrollToTop}>
-                        Scroll Up
-                      </button>
-                    </center>
                   </div>
                 ) : (
                   ''
